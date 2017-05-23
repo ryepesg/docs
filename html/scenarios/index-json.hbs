@@ -1,0 +1,203 @@
+<div id="docs-page" class="container">
+  <div class="col s12">
+    <h2>Understanding Katacoda's index.json</h2>
+    <section>
+      <p>
+        The index.json file is the place where the information about the scenario is defined. This page will outline the options.
+      </p>
+      <h4>Titles and Descriptions</h4>
+      <table>
+        <tr>
+          <td>pathwayTitle</td>
+          <td>Title of the collection of scenarios</td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>Title the scenario</td>
+        </tr>
+        <tr>
+          <td>description</td>
+          <td>Description of the scenario, displayed on the intro screen</td>
+        </tr>
+        <tr>
+          <td>difficulty</td>
+          <td>Provide users with a sense of the depth of content, displayed on the intro screen</td>
+        </tr>
+        <tr>
+          <td>time</td>
+          <td>Provide users with an estimated time to complete, displayed on the intro screen</td>
+        </tr>
+      </table>
+
+      <h4>Details Node</h4>
+      <table>
+        <tr>
+          <td>steps</td>
+          <td>Details for the scenario steps</td>
+        </tr>
+        <tr>
+          <td>intro</td>
+          <td>Details for the intro screen</td>
+        </tr>
+        <tr>
+          <td>finish</td>
+          <td>Details for the finish screen</td>
+        </tr>
+        <tr>
+          <td>assets</td>
+          <td>Files to upload to the environment</td>
+        </tr>
+      </table>
+
+      <h4>Steps Node</h4>
+      <table>
+        <tr>
+          <td>title</td>
+          <td>Title for the step.</td>
+        </tr>
+        <tr>
+          <td>text</td>
+          <td>Filename containing the body for the step.</td>
+        </tr>
+        <tr>
+          <td>answer</td>
+          <td>Filename containing the answer body for the step.</td>
+        </tr>
+        <tr>
+          <td>verify</td>
+          <td>Bash script to run to check if the user can proceed. More details <a href="/docs/scenarios/verify">here</a>.</td>
+        </tr>
+        <tr>
+          <td>courseData</td>
+          <td>Bash script to run in the background. More details <a href="/docs/scenarios/courseData">here</a>.</td>
+        </tr>
+        <tr>
+          <td>code</td>
+          <td>Bash script to run in the foreground. More details <a href="/docs/scenarios/code">here</a>.</td>
+        </tr>
+      </table>
+
+      <h4>Intro/Finish Node</h4>
+      <table>
+        <tr>
+          <td>text</td>
+          <td>Filename containing the body for the screen.</td>
+        </tr>
+        <tr>
+          <td>credits</td>
+          <td>Display a link on the intro screen, useful for linking to blog post for giving credit.</td>
+        </tr>
+        <tr>
+          <td>courseData</td>
+          <td>Bash script to run in the background. More details <a href="/docs/scenarios/courseData">here</a>.</td>
+        </tr>
+        <tr>
+          <td>code</td>
+          <td>Bash script to run in the foreground. More details <a href="/docs/scenarios/code">here</a>.</td>
+        </tr>
+      </table>
+
+      <h4>Files</h4>
+      <p>For use with the UI Editor layout, define filenames that would be opened by default.</p>
+
+      <h4>Environment</h4>
+      <table>
+        <tr>
+          <td>showdashboard</td>
+          <td>Should Dashboard tabs be shown in UI.</td>
+        </tr>
+        <tr>
+          <td>dashboards</td>
+          <td>Easily provide links for accessing dashboard/UI ports running in the environment.</td>
+        </tr>
+        <tr>
+          <td>uilayout</td>
+          <td>The layout ID provided by Katacoda. More details <a href="/docs/scenarios/layouts">here</a>.</td>
+        </tr>
+        <tr>
+          <td>uimessage1</td>
+          <td>Message to display at the top of the interative terminal.</td>
+        </tr>
+      </table>
+
+      <h4>Backend</h4>
+      <table>
+        <tr>
+          <td>imageid</td>
+          <td>Environment image id provided by Katacoda. More details <a href="/docs/scenarios/environments">here</a>.</td>
+        </tr>
+      </table>
+
+
+      <h3>Example</h3>
+
+      <pre>
+{
+  "pathwayTitle": "Pathway Title",
+  "title": "Scenario Title",
+  "description": "Scenario Description",
+  "difficulty": "beginner",
+  "time": "5-10 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step Title",
+        "text": "step1.md",
+        "answer": "step1-answer.md",
+        "verify": "step1-verify.sh",
+        "courseData": "run-command-in-background.sh",
+        "code": "run-command-in-terminal.sh"
+      },
+      {
+        "title": "Step 2 - Step Title",
+        "text": "step2.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "courseData": "courseBase.sh",
+      "credits": "",
+      "code": "changecd.sh"
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "client": [
+        {
+          "file": "docker-compose.yml",
+          "target": "~/"
+        }
+      ],
+      "host01": [
+        {
+          "file": "config.yml",
+          "target": "~/"
+        }
+      ]
+    }
+  },
+  "files": [
+    "app.js"
+  ],
+  "environment": {
+    "showdashboard": true,
+    "dashboards": [{"name": "Tab Name", "port": 80}, {"name": "Tab Name", "port": 8080}],
+    "uilayout": "terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal. A safe place to learn and execute commands.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "docker"
+  }
+}
+
+      </pre>
+
+      <h5>Additional Information</h5>
+      <p><a href="https://github.com/katacoda/scenario-example/blob/master/example-index-json/index.jsonschema" target="_blank">index.json schema</a></p>
+      <p><a href="/docs/scenarios/layouts">What layouts can I use?</a></p>
+      <p><a href="/docs/scenarios/environments">What environments can I use?</a></p>
+      <p><a href="/docs/scenarios/pre-init">Pre-Existing Files / Execute Commands On Start</a></p>
+    </section>
+  </div>
+</div>

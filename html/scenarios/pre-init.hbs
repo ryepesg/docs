@@ -1,0 +1,41 @@
+<div id="docs-page" class="container">
+    <div class="col s12">
+        <h2>Running commands to customise environment</h2>
+        <p>Katacoda environments are pre-configured with the base configuration, for example , Docker or Kubernetes. Commands can be run in the background when the user connects that allow the environment to be customised. Files from the directory can also be uploaded.</p>
+        <section>
+          <h4>Running Commands</h4>
+          <p>Bash scripts defined in courseData will run in the background when the user begins that step. For intro, this means the commands will run when the environment becomes available. For steps, this is when the user starts the step. This is perfect for configuring scenarios and environments to help guide the user.</p>
+          <p>Bash scripts defined in code work the same as courseData but will run in the foreground.</p>
+
+          <h4>Uploading Files</h4>
+          <p>Files in a <strong>assets</strong> directory within the scenario can have files uploaded to the client or host of the environment.</p>
+        <p></p>
+
+          <h3>Index.json Example</h3>
+
+    <pre>
+"details": {
+  "intro": {
+    "courseData": "courseBase.sh",
+  },
+  "assets": {
+    "client": [
+      {
+        "file": "docker-compose.yml",
+        "target": "~/"
+      }
+    ],
+    "host01": [
+      {
+        "file": "config.yml",
+        "target": "~/"
+      }
+    ]
+  }
+}
+    </pre>
+            <h5>Additional Information</h5>
+            <p><a href="/docs/scenarios/index-json">Understanding Katacoda's index.json</a></p>
+        </section>
+    </div>
+</div>
