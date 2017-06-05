@@ -45,7 +45,12 @@
         </tr>
         <tr>
           <td>assets</td>
-          <td>Files to upload to the environment</td>
+          <td>Files to upload to the environment. There are different places where the files can be uploaded, the client and any of the hosts. The client is the container defined in the index.json file. host01 is where Docker itself is running. When using a cluster of containers, there will be others hosts, for example host02.</td>
+          <td><p>To copy all files to the /root folder in the host01 you can use:<br/>
+          "assets": { "host01": [ {"file": "*", "target": "/root"} ] }</p>
+          <p>To copy the file example to the home of the client and to grant execution privileges:<br/>
+          "assets": { "client": [{"file": "example", "target": "/home/scrapbook/", "chmod": "+x"}] }</p>
+          </td>
         </tr>
       </table>
 
@@ -103,12 +108,34 @@
       <h4>Environment</h4>
       <table>
         <tr>
+          <td>hideintro</td>
+          <td>Boolean field that control if the intro step is shown to the user. By default it is hidden in the embedded mode.</td>
+          <td>Example:<br/>"environment": { "uilayout": "terminal", "hideintro": false}</td>
+        </tr>
+        <tr>
+          <td>hidefinish</td>
+          <td>Boolean field that control if the finish step is shown to the user. By default it is hidden in the embedded mode.</td>
+          <td>Example:<br/>"environment": { "uilayout": "terminal", "hidefinish": true }</td>
+        </tr>
+        <tr>
+          <td>uisettings</td>
+          <td>Especify the format of the files for syntax highlighting in the editor (useful when it doesn't recognize the extension you are using). The suported formats are: reactjs, makefile, dockerfile, dockercompose, csharp, javascript, golang, java and xml.</td>
+          <td>Example:<br/>"environment": {"uisettings": "yaml"}</td>
+        </tr>
+        <tr>
+          <td>icon</td>
+          <td>The icon for the scenario. The list of icons is at the <a href="https://www.katacoda.com/" target="_">home page</a>. The possible values are: fa-docker, fa-weave, fa-kubernetes, fa-openshift, fa-dcos, fa-tensorflow, fa-runc, fa-coreos, fa-elixir, fa-csharp, fa-fsharp, fa-rlang, fa-golang, fa-java, fa-node and fa-ruby.</td>
+          <td>Example:<br/>"icon": "fa-node"</td>
+        </tr>
+        <tr>
           <td>showdashboard</td>
           <td>Should Dashboard tabs be shown in UI.</td>
         </tr>
         <tr>
           <td>dashboards</td>
-          <td>Easily provide links for accessing dashboard/UI ports running in the environment.</td>
+          <td>Easily provide links for accessing dashboard/UI ports running in the environment. When using the terminal-iframe layout, it also show the exposed port of the container, without the need of open a new window. You can specify the name, port and the host identifier.</td>
+          <td>To display a tab called App showing the port 8080 from the host host02:<br/>
+          "dashboards": [{ "name": "App", "port": 8080, "host": "host02" }</td>
         </tr>
         <tr>
           <td>uilayout</td>
